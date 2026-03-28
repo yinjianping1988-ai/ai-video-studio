@@ -1176,8 +1176,19 @@
             const project = projects.find(p => p.id === projectId);
             
             if (project) {
-                alert(`📁 打开项目：${project.name}\n\n功能开发中...`);
-                // TODO: Navigate to project detail page
+                // 切换到剧本创作页面，并加载项目信息
+                showSection('analysis');
+                
+                // 更新页面标题显示当前项目
+                const header = document.querySelector('#analysis .section-header h2');
+                header.innerText = `📝 剧本创作与分析 - ${project.name}`;
+                
+                // 提示用户
+                const msg = project.scripts && project.scripts.length > 0 
+                    ? `📁 已打开项目：${project.name}\n\n该项目已有 ${project.scripts.length} 个剧本`
+                    : `📁 已打开项目：${project.name}\n\n可以开始创作剧本了！`;
+                
+                alert(msg);
             }
         }
 
