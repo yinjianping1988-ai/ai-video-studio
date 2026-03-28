@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 AI 短视频制作工作室</title>
+    <title>AI 短剧智能创作平台 - 从小说到分镜的一站式解决方案</title>
     <style>
         * {
             margin: 0;
@@ -12,17 +12,17 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #ec4899;
-            --bg: #0f172a;
-            --bg-card: #1e293b;
-            --bg-hover: #334155;
-            --text: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --success: #10b981;
-            --warning: #f59e0b;
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --secondary: #ff6b6b;
+            --bg: #ffffff;
+            --bg-card: #f8f9fa;
+            --bg-hover: #e9ecef;
+            --text: #212529;
+            --text-muted: #6c757d;
+            --border: #dee2e6;
+            --success: #28a745;
+            --warning: #ffc107;
         }
 
         body {
@@ -30,887 +30,862 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 2rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            opacity: 0.9;
-            font-size: 0.95rem;
         }
 
         /* Navigation */
         .nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg-card);
+            background: var(--bg);
             border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
         }
 
-        .nav-btn {
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #6366f1);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-btn {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            padding: 3rem 2rem;
+            background: var(--bg-card);
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+        }
+
+        /* Main Tool Section */
+        .tool-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tool-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tool-tab {
             padding: 0.75rem 1.5rem;
             background: transparent;
             border: 2px solid var(--border);
-            color: var(--text);
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
             font-weight: 500;
+            transition: all 0.3s;
         }
 
-        .nav-btn:hover {
-            background: var(--bg-hover);
+        .tool-tab:hover {
             border-color: var(--primary);
         }
 
-        .nav-btn.active {
+        .tool-tab.active {
             background: var(--primary);
             border-color: var(--primary);
+            color: white;
         }
 
-        /* Main Content */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .section {
+        .tool-content {
             display: none;
         }
 
-        .section.active {
+        .tool-content.active {
             display: block;
-            animation: fadeIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Cards */
-        .card {
+        .input-area {
             background: var(--bg-card);
+            padding: 2rem;
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--border);
+            margin-bottom: 2rem;
         }
 
-        .card h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+        .input-area label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
 
-        .card h3 {
-            color: var(--text);
-            margin: 1.5rem 0 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        /* Form Elements */
-        textarea, input, select {
+        .input-area textarea {
             width: 100%;
-            padding: 0.75rem;
-            background: var(--bg);
+            min-height: 300px;
+            padding: 1rem;
             border: 1px solid var(--border);
             border-radius: 8px;
-            color: var(--text);
+            font-family: inherit;
             font-size: 1rem;
-            margin-bottom: 1rem;
+            resize: vertical;
         }
 
-        textarea:focus, input:focus, select:focus {
+        .input-area textarea:focus {
             outline: none;
             border-color: var(--primary);
         }
 
-        textarea {
-            min-height: 150px;
-            resize: vertical;
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
 
-        button {
-            padding: 0.75rem 1.5rem;
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .option-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .action-btn {
             background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 8px;
-            color: white;
             font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        button.secondary {
-            background: var(--bg-hover);
-        }
-
-        button.success {
-            background: var(--success);
-        }
-
-        /* Tags */
-        .tag-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tag {
-            padding: 0.5rem 1rem;
-            background: var(--bg-hover);
-            border-radius: 20px;
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-        }
-
-        .tag:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .tag.selected {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .tag-category {
+            transition: background 0.3s;
             width: 100%;
-            margin: 1rem 0 0.5rem;
-            padding: 0.5rem;
-            background: var(--bg-hover);
-            border-radius: 8px;
-            font-weight: 600;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .action-btn:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        /* Result Section */
+        .result-section {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .result-header h3 {
             color: var(--primary);
         }
 
-        /* Output Area */
-        .output {
-            background: var(--bg);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-            border: 1px solid var(--border);
-            white-space: pre-wrap;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.9rem;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-
-        /* Progress */
-        .progress-bar {
-            background: var(--bg);
-            border-radius: 8px;
-            height: 8px;
-            margin: 1rem 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0%;
-            transition: width 0.3s;
-        }
-
-        /* Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        /* Status */
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
-
-        .status.waiting {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--warning);
-        }
-
-        .status.ready {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: currentColor;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Workflow Diagram */
-        .workflow-diagram {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            padding: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .workflow-step {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-            min-width: 200px;
-            border: 2px solid var(--border);
-            transition: all 0.3s;
-        }
-
-        .workflow-step:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
-        }
-
-        .workflow-step.active {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
-        }
-
-        .workflow-step .icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .workflow-arrow {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-        }
-
-        /* Copy Button */
         .copy-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
+            background: var(--success);
+            color: white;
             padding: 0.5rem 1rem;
-            font-size: 0.875rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
 
-        .output-wrapper {
-            position: relative;
+        .copy-btn:hover {
+            background: #218838;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.5rem;
-            }
+        .result-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            min-height: 200px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
 
-            .nav {
-                flex-direction: column;
-            }
+        /* Analysis Tags */
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 0.25rem;
+        }
 
-            .nav-btn {
-                width: 100%;
-            }
+        .tag-success {
+            background: #d4edda;
+            color: #155724;
+        }
 
-            .workflow-diagram {
-                flex-direction: column;
-            }
+        .tag-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
 
-            .workflow-arrow {
-                transform: rotate(90deg);
-            }
+        .tag-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .tag-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin: 0.5rem 0;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: underline;
         }
 
         /* Loading */
         .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        .loading-spinner {
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
             border-radius: 50%;
-            border-top-color: white;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats {
+                gap: 2rem;
+            }
+
+            .tool-tabs {
+                flex-direction: column;
+            }
+
+            .tool-tab {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>🎬 AI 短视频制作工作室</h1>
-        <p>从小说/设定到完整视频提示词的完整生产链路</p>
-    </header>
-
+    <!-- Navigation -->
     <nav class="nav">
-        <button class="nav-btn active" data-section="workflow">📊 工作流总览</button>
-        <button class="nav-btn" data-section="script">✍️ 阶段一：剧本创作</button>
-        <button class="nav-btn" data-section="storyboard">🎞️ 阶段二：分镜拆解</button>
-        <button class="nav-btn" data-section="prompt">🎨 阶段三：提示词生成</button>
+        <div class="nav-brand">🎬 AI 短剧创作</div>
+        <div class="nav-links">
+            <a href="#home" class="active">首页</a>
+            <a href="#analysis">剧本分析</a>
+            <a href="#storyboard">分镜生成</a>
+            <a href="#prompt">提示词工具</a>
+        </div>
     </nav>
 
-    <div class="container">
-        <!-- Section 1: Workflow Overview -->
-        <section id="workflow" class="section active">
-            <div class="card">
-                <h2>📋 三阶段生产链路</h2>
-                <div class="workflow-diagram">
-                    <div class="workflow-step active">
-                        <div class="icon">✍️</div>
-                        <h3>剧本创作</h3>
-                        <p>小说/设定 → 2 分钟剧本</p>
-                    </div>
-                    <div class="workflow-arrow">→</div>
-                    <div class="workflow-step">
-                        <div class="icon">🎞️</div>
-                        <h3>分镜拆解</h3>
-                        <p>剧本 → 15 秒分段</p>
-                    </div>
-                    <div class="workflow-arrow">→</div>
-                    <div class="workflow-step">
-                        <div class="icon">🎨</div>
-                        <h3>提示词生成</h3>
-                        <p>生成图像/视频提示词</p>
-                    </div>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>让小说瞬间变分镜</h1>
+        <p>AI 驱动的智能短剧创作平台，从小说/剧本到完整分镜提示词，一站式搞定</p>
+        <button class="hero-btn" onclick="document.getElementById('analysis').scrollIntoView({behavior: 'smooth'})">开始创作</button>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-item">
+            <div class="stat-number">10x</div>
+            <div class="stat-label">效率提升</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">260+</div>
+            <div class="stat-label">标签库</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">4</div>
+            <div class="stat-label">风格模板</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">15s</div>
+            <div class="stat-label">单段时长</div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>核心功能</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>智能剧本分析</h3>
+                <ul>
+                    <li>故事合理性检查</li>
+                    <li>错别字/语法纠错</li>
+                    <li>角色一致性分析</li>
+                    <li>剧情节奏评估</li>
+                </ul>
             </div>
-
-            <div class="grid">
-                <div class="card">
-                    <h3>📝 阶段一：剧本创作</h3>
-                    <p>将小说/故事设定改编为 2 分钟/集的竖屏短剧</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                        <li>开篇 3 秒抓眼冲突</li>
-                        <li>每 15 秒一个小节点</li>
-                        <li>每 30 秒一个反转</li>
-                        <li>结尾留钩子/悬念</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3>🎬 阶段二：分镜拆解</h3>
-                    <p>将完整剧本转为高密度执行稿</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                        <li>15 秒为一个段落</li>
-                        <li>角色统一设定表</li>
-                        <li>场景统一设定表</li>
-                        <li>图像 + 视频双提示词</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3>🎨 阶段三：提示词生成</h3>
-                    <p>基于标签快速生成多样化提示词</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                        <li>7 大类 260+ 标签</li>
-                        <li>4 种风格模板</li>
-                        <li>批量生成变体</li>
-                        <li>一键复制使用</li>
-                    </ul>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎞️</div>
+                <h3>自动分镜拆解</h3>
+                <ul>
+                    <li>15 秒段落自动拆分</li>
+                    <li>场景/角色自动标注</li>
+                    <li>镜头语言建议</li>
+                    <li>转场效果推荐</li>
+                </ul>
             </div>
-
-            <div class="card">
-                <h2>🚀 快速开始</h2>
-                <p style="margin-bottom: 1rem;">点击上方导航栏，选择你要使用的功能模块。</p>
-                <button onclick="switchSection('script')">开始创作剧本</button>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>提示词生成</h3>
+                <ul>
+                    <li>图像提示词自动生成</li>
+                    <li>视频提示词优化</li>
+                    <li>风格标签匹配</li>
+                    <li>批量变体生成</li>
+                </ul>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Section 2: Script Creation -->
-        <section id="script" class="section">
-            <div class="card">
-                <h2>✍️ 阶段一：剧本创作</h2>
-                <div class="status waiting">
-                    <span class="status-dot"></span>
-                    <span id="script-status">等待素材输入...</span>
-                </div>
+    <!-- Main Tool Section -->
+    <section class="tool-section" id="analysis">
+        <h2 style="text-align: center; margin-bottom: 2rem;">智能创作工具</h2>
+        
+        <!-- Tabs -->
+        <div class="tool-tabs">
+            <button class="tool-tab active" onclick="switchTab('analysis')">📊 剧本分析</button>
+            <button class="tool-tab" onclick="switchTab('storyboard')">🎞️ 分镜生成</button>
+            <button class="tool-tab" onclick="switchTab('prompt')">🎨 提示词工具</button>
+        </div>
 
-                <h3>📥 输入素材</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">提供小说章节、故事设定、人物小传或剧情梗概</p>
-                <textarea id="script-input" placeholder="请粘贴你的小说原文、故事设定或剧情梗概...
+        <!-- Analysis Tab -->
+        <div id="analysis-tab" class="tool-content active">
+            <div class="input-area">
+                <label for="script-input">粘贴你的小说/剧本：</label>
+                <textarea id="script-input" placeholder="在这里粘贴你的小说章节、剧本内容或故事大纲...
 
 示例：
-主角林婉儿前世被夫君和妹妹联手害死，重生回到大婚当日。
-她发誓要复仇，让所有背叛她的人付出代价..."></textarea>
-
-                <div class="grid">
-                    <div>
-                        <label>故事类型</label>
-                        <select id="script-type">
-                            <option value="古风权谋">古风权谋</option>
-                            <option value="重生复仇">重生复仇</option>
-                            <option value="仙侠玄幻">仙侠玄幻</option>
-                            <option value="现代都市">现代都市</option>
-                            <option value="悬疑推理">悬疑推理</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>单集时长</label>
-                        <select id="script-duration">
-                            <option value="2">2 分钟</option>
-                            <option value="3">3 分钟</option>
-                            <option value="5">5 分钟</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button onclick="analyzeScript()" id="analyze-btn">
-                    🔍 分析素材并生成剧本
-                </button>
-            </div>
-
-            <div class="card" id="script-output-card" style="display: none;">
-                <h2>📝 分析报告</h2>
-                <div class="output-wrapper">
-                    <button class="copy-btn secondary" onclick="copyOutput('script-output')">📋 复制</button>
-                    <div class="output" id="script-output"></div>
-                </div>
-                <button onclick="generateScript()" class="success" style="margin-top: 1rem;">
-                    ✅ 确认分析，生成剧本正文
-                </button>
-            </div>
-
-            <div class="card" id="script-final-card" style="display: none;">
-                <h2>🎬 剧本正文</h2>
-                <div class="output-wrapper">
-                    <button class="copy-btn secondary" onclick="copyOutput('script-final')">📋 复制</button>
-                    <div class="output" id="script-final"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: Storyboard Breakdown -->
-        <section id="storyboard" class="section">
-            <div class="card">
-                <h2>🎞️ 阶段二：分镜拆解</h2>
-                <div class="status waiting">
-                    <span class="status-dot"></span>
-                    <span id="storyboard-status">等待剧本输入...</span>
-                </div>
-
-                <h3>📥 输入剧本</h3>
-                <textarea id="storyboard-input" placeholder="请粘贴完整的剧本文本..."></textarea>
-
-                <button onclick="breakdownStoryboard()" id="breakdown-btn">
-                    🎬 拆分为 15 秒分镜
-                </button>
-            </div>
-
-            <div class="card" id="storyboard-output-card" style="display: none;">
-                <h2>📋 分镜执行稿</h2>
-                <div class="output-wrapper">
-                    <button class="copy-btn secondary" onclick="copyOutput('storyboard-output')">📋 复制</button>
-                    <div class="output" id="storyboard-output"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Prompt Generation -->
-        <section id="prompt" class="section">
-            <div class="card">
-                <h2>🎨 阶段三：提示词生成</h2>
+第一章：重逢
+咖啡厅里，林小雨紧张地搅动着咖啡。三年了，她没想到会在这里遇见他。
+"李阳？"她抬起头，声音有些颤抖。
+对面的男人微微一笑，眼神里闪过一丝复杂的情绪。"></textarea>
                 
-                <h3>🏷️ 选择标签</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1rem;">点击选择标签（建议 3-6 个）</p>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="checkbox" id="check-logic" checked>
+                        <label for="check-logic">故事合理性检查</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="check-typo" checked>
+                        <label for="check-typo">错别字/语法纠错</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="check-character" checked>
+                        <label for="check-character">角色一致性分析</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="check-rhythm" checked>
+                        <label for="check-rhythm">剧情节奏评估</label>
+                    </div>
+                </div>
+
+                <button class="action-btn" onclick="analyzeScript()">🔍 开始智能分析</button>
+            </div>
+
+            <div id="analysis-result" class="result-section" style="display: none;">
+                <div class="result-header">
+                    <h3>📊 分析结果</h3>
+                    <button class="copy-btn" onclick="copyResult('analysis-result-content')">📋 复制结果</button>
+                </div>
+                <div id="analysis-result-content" class="result-content"></div>
+            </div>
+        </div>
+
+        <!-- Storyboard Tab -->
+        <div id="storyboard-tab" class="tool-content">
+            <div class="input-area">
+                <label for="storyboard-input">输入剧本或分析后的内容：</label>
+                <textarea id="storyboard-input" placeholder="粘贴剧本内容，或使用上面分析后的结果..."></textarea>
                 
-                <div id="tag-container">
-                    <!-- Tags will be generated by JS -->
-                </div>
-
-                <h3>⚙️ 生成设置</h3>
-                <div class="grid">
-                    <div>
-                        <label>生成数量</label>
-                        <select id="prompt-count">
-                            <option value="5">5 组</option>
-                            <option value="8">8 组</option>
-                            <option value="10">10 组</option>
-                        </select>
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="checkbox" id="sb-scene" checked>
+                        <label for="sb-scene">场景标注</label>
                     </div>
-                    <div>
-                        <label>风格模板</label>
-                        <select id="prompt-template">
-                            <option value="auto">自动匹配</option>
-                            <option value="realistic">真实感</option>
-                            <option value="cg">CG 感</option>
-                            <option value="ancient">古风</option>
-                            <option value="myth">神话感</option>
-                        </select>
+                    <div class="option-item">
+                        <input type="checkbox" id="sb-character" checked>
+                        <label for="sb-character">角色标注</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="sb-camera" checked>
+                        <label for="sb-camera">镜头建议</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="sb-prompt" checked>
+                        <label for="sb-prompt">生成提示词</label>
                     </div>
                 </div>
 
-                <button onclick="generatePrompts()" id="generate-prompt-btn">
-                    ✨ 生成提示词
-                </button>
+                <button class="action-btn" onclick="generateStoryboard()">🎬 生成分镜</button>
             </div>
 
-            <div class="card" id="prompt-output-card" style="display: none;">
-                <h2>🎨 生成的提示词</h2>
-                <div class="output-wrapper">
-                    <button class="copy-btn secondary" onclick="copyOutput('prompt-output')">📋 复制全部</button>
-                    <div class="output" id="prompt-output"></div>
+            <div id="storyboard-result" class="result-section" style="display: none;">
+                <div class="result-header">
+                    <h3>🎞️ 分镜结果</h3>
+                    <button class="copy-btn" onclick="copyResult('storyboard-result-content')">📋 复制结果</button>
                 </div>
+                <div id="storyboard-result-content" class="result-content"></div>
             </div>
-        </section>
-    </div>
+        </div>
+
+        <!-- Prompt Tab -->
+        <div id="prompt-tab" class="tool-content">
+            <div class="input-area">
+                <label for="prompt-input">输入分镜内容或描述：</label>
+                <textarea id="prompt-input" placeholder="粘贴分镜内容，或描述你想要的画面..."></textarea>
+                
+                <div class="options-grid">
+                    <div class="option-item">
+                        <input type="checkbox" id="pt-image" checked>
+                        <label for="pt-image">图像提示词</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="pt-video" checked>
+                        <label for="pt-video">视频提示词</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="pt-style">
+                        <label for="pt-style">风格优化</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="pt-variant">
+                        <label for="pt-variant">生成变体</label>
+                    </div>
+                </div>
+
+                <button class="action-btn" onclick="generatePrompt()">🎨 生成提示词</button>
+            </div>
+
+            <div id="prompt-result" class="result-section" style="display: none;">
+                <div class="result-header">
+                    <h3>🎨 提示词结果</h3>
+                    <button class="copy-btn" onclick="copyResult('prompt-result-content')">📋 复制结果</button>
+                </div>
+                <div id="prompt-result-content" class="result-content"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>AI 短剧智能创作平台</p>
+        <p>让想象力瞬间成片</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            <a href="#">使用条款</a> | <a href="#">隐私政策</a> | <a href="#">联系我们</a>
+        </p>
+    </footer>
 
     <script>
-        // Tag Database
-        const tagDatabase = {
-            '主体类型': ['少女', '少年', '成年女性', '成年男性', '中年女性', '中年男性', '儿童', '老年', '东亚', '欧美', '混血', '二次元', '清纯', '妩媚', '冷艳', '甜美', '帅气', '优雅', '高挑', '纤细', '健美', '神女', '仙子', '剑客', '骑士'],
-            '画面风格': ['真实感', '照片级', '胶片感', 'CG 感', '3D 渲染', '虚幻引擎', '动漫', '古风', '赛博朋克', '水墨', '油画', '插画', '国潮', '未来感'],
-            '光影氛围': ['自然光', '柔光', '逆光', '轮廓光', '霓虹光', '清晨', '黄昏', '夜晚', '黄金时刻', '暖色调', '冷色调', '电影色调', '神圣', '梦幻', '神秘', '浪漫'],
-            '构图视角': ['特写', '近景', '中景', '全景', '远景', '仰视', '俯视', '平视', '广角', '长焦', '三分法', '中心构图', '对称构图'],
-            '服装造型': ['汉服', '旗袍', '古装', '西装', '礼服', '盔甲', '披风', '丝绸', '蕾丝', ' oversized', '武侠', '仙侠', '宫廷'],
-            '场景背景': ['宫殿', '街道', '森林', '海边', '山顶', '星空', '云海', '竹林', '战场', '古风建筑', '未来都市', '异世界'],
-            '技术画质': ['4K', '8K', '杰作', '最佳质量', '大师级', '超精细', '景深', '虚化', 'HDR', '电影感', '光线追踪']
-        };
-
-        // Initialize Tags
-        function initTags() {
-            const container = document.getElementById('tag-container');
-            for (const [category, tags] of Object.entries(tagDatabase)) {
-                const categoryDiv = document.createElement('div');
-                categoryDiv.className = 'tag-category';
-                categoryDiv.textContent = category;
-                container.appendChild(categoryDiv);
-
-                const tagContainer = document.createElement('div');
-                tagContainer.className = 'tag-container';
-                
-                tags.forEach(tag => {
-                    const tagEl = document.createElement('div');
-                    tagEl.className = 'tag';
-                    tagEl.textContent = tag;
-                    tagEl.onclick = () => tagEl.classList.toggle('selected');
-                    tagContainer.appendChild(tagEl);
-                });
-
-                container.appendChild(tagContainer);
-            }
-        }
-
-        // Navigation
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const section = btn.dataset.section;
-                switchSection(section);
+        // Tab Switching
+        function switchTab(tabName) {
+            // Update tabs
+            document.querySelectorAll('.tool-tab').forEach(tab => {
+                tab.classList.remove('active');
             });
-        });
+            event.target.classList.add('active');
 
-        function switchSection(sectionId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(sectionId).classList.add('active');
-            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+            // Update content
+            document.querySelectorAll('.tool-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + '-tab').classList.add('active');
+
+            // Scroll to section
+            document.getElementById(tabName).scrollIntoView({behavior: 'smooth'});
         }
 
-        // Copy Function
-        function copyOutput(elementId) {
-            const text = document.getElementById(elementId).textContent;
-            navigator.clipboard.writeText(text);
-            
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = '✅ 已复制';
-            btn.classList.add('success');
-            
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.classList.remove('success');
-            }, 2000);
+        // Copy Result
+        function copyResult(elementId) {
+            const content = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('✅ 已复制到剪贴板！');
+            }).catch(err => {
+                alert('❌ 复制失败，请手动复制');
+            });
         }
 
-        // Script Analysis
+        // Analyze Script (Mock Function - Replace with actual API call)
         function analyzeScript() {
             const input = document.getElementById('script-input').value;
-            const type = document.getElementById('script-type').value;
             
             if (!input.trim()) {
-                alert('请输入素材内容！');
+                alert('⚠️ 请先输入小说/剧本内容');
                 return;
             }
 
-            const btn = document.getElementById('analyze-btn');
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading"></span> 分析中...';
+            const resultDiv = document.getElementById('analysis-result');
+            const resultContent = document.getElementById('analysis-result-content');
+            
+            // Show loading
+            resultDiv.style.display = 'block';
+            resultContent.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在智能分析中，请稍候...</p>
+                </div>
+            `;
 
-            // Simulate analysis
+            // Mock analysis (Replace with actual API call)
             setTimeout(() => {
-                const analysis = `📝 剧本创作分析报告
-
-1. 素材核心概要
-   - 类型：${type}
-   - 核心冲突：重生复仇
-   - 主角：林婉儿
-
-2. 核心剧情提炼
-   - 最强戏剧冲突：大婚当日发现背叛
-   - 反转点：前世记忆觉醒
-   - 爽点：复仇打脸
-
-3. 核心人物梳理
-   - 主角：林婉儿（重生女主，聪慧果断）
-   - 对手：夫君（负心汉）、妹妹（绿茶）
-   - 关键配角：贴身丫鬟（忠诚）
-
-4. 情感与风格基调
-   - 重生复仇爽感
-   - 权谋博弈压迫感
-   - 情感张力强烈
-
-5. 创作改编重点
-   - 保留：核心复仇线、关键反转
-   - 压缩：背景交代、心理描写
-   - 放大：冲突场面、打脸瞬间
-
-6. 场次规划（3-4 场）
-   - 场次 1：大婚现场，记忆觉醒
-   - 场次 2：发现背叛证据
-   - 场次 3：首次反击打脸
-   - 场次 4：留下悬念钩子
-
-如果分析无误，请点击下方按钮生成剧本正文。`;
-
-                document.getElementById('script-output').textContent = analysis;
-                document.getElementById('script-output-card').style.display = 'block';
-                document.getElementById('script-status').textContent = '分析完成，等待确认...';
-                document.getElementById('script-status').parentElement.className = 'status ready';
-                
-                btn.disabled = false;
-                btn.innerHTML = '🔍 重新分析';
-            }, 1500);
-        }
-
-        function generateScript() {
-            const btn = event.target;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading"></span> 生成中...';
-
-            setTimeout(() => {
-                const script = `集数：第 1 集 重生大婚日
-------------------------------------------------
-场次 1：相府大婚喜堂 日
-------------------------------------------------
-出场人物：林婉儿；新郎赵恒；宾客若干
-△ 红烛高照，喜字满堂。林婉儿身着凤冠霞帔，盖头下的眼神却异常清醒。
-**林婉儿**（内心独白）："我又回到了这一天...大婚之日，也是我被背叛的开始。"
-△ 赵恒走近，挑起盖头。林婉儿看着他虚伪的笑脸，指甲深深掐进掌心。
-**赵恒**（温柔）："婉儿，从今往后，我定不负你。"
-**林婉儿**（冷笑）："最好如此。"
-
-场次 2：新房内 夜
-------------------------------------------------
-出场人物：林婉儿；丫鬟小翠
-△ 宾客散尽，小翠匆匆进来，神色慌张。
-**小翠**（压低声音）："小姐，奴婢打听到了！姑爷今晚去了林侧妃那里！"
-△ 林婉儿猛地站起，凤冠滑落。
-**林婉儿**（眼神凌厉）："走，我们去会会这对好鸳鸯。"
-
-场次 3：林侧妃院落 夜
-------------------------------------------------
-出场人物：林婉儿；赵恒；林侧妃（妹妹）
-△ 屋内传来暧昧笑声。林婉儿一脚踹开房门。
-**林婉儿**（冷笑）："好一个洞房花烛夜，好一对鸳鸯。"
-△ 赵恒和林侧妃惊慌失措。
-**赵恒**："婉儿，你听我解释..."
-**林婉儿**（打断）："不必。明日朝堂之上，我自会让你们解释清楚。"
-△ 林婉儿转身离去，留下一个意味深长的眼神。
-
-（完）
-【下集预告】林婉儿如何在朝堂之上反击？前世害死她的真凶又是谁？`;
-
-                document.getElementById('script-final').textContent = script;
-                document.getElementById('script-final-card').style.display = 'block';
-                document.getElementById('script-status').textContent = '剧本创作完成！';
-                
-                btn.disabled = false;
-                btn.innerHTML = '✅ 生成完成';
+                const mockResult = generateMockAnalysis(input);
+                resultContent.innerHTML = mockResult;
             }, 2000);
         }
 
-        // Storyboard Breakdown
-        function breakdownStoryboard() {
+        // Generate Mock Analysis
+        function generateMockAnalysis(input) {
+            const wordCount = input.length;
+            const paragraphCount = input.split('\n\n').length;
+            
+            return `
+<span class="tag tag-info">📊 基础统计</span>
+• 总字数：${wordCount} 字
+• 段落数：${paragraphCount} 段
+• 预估时长：${Math.ceil(wordCount / 300)} 分钟
+
+<span class="tag tag-success">✅ 故事合理性</span>
+• 故事结构完整，有明确的起承转合
+• 时间线清晰，无逻辑矛盾
+• 场景转换自然流畅
+
+<span class="tag tag-warning">⚠️ 建议优化</span>
+• 开篇可增加更强的冲突点吸引读者
+• 部分对话可精简，提升节奏感
+• 建议在关键情节点增加细节描写
+
+<span class="tag tag-info">👥 角色分析</span>
+• 主要角色：待识别（需要更多内容）
+• 角色关系：待分析
+• 性格特征：待提取
+
+<span class="tag tag-success">📈 节奏评估</span>
+• 整体节奏：中等
+• 冲突密度：适中
+• 悬念设置：良好
+
+---
+💡 综合评分：85/100
+建议：内容质量良好，可直接进入分镜生成阶段
+            `.trim();
+        }
+
+        // Generate Storyboard (Mock Function)
+        function generateStoryboard() {
             const input = document.getElementById('storyboard-input').value;
             
             if (!input.trim()) {
-                alert('请输入剧本内容！');
+                alert('⚠️ 请先输入剧本内容');
                 return;
             }
 
-            const btn = document.getElementById('breakdown-btn');
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading"></span> 拆解中...';
+            const resultDiv = document.getElementById('storyboard-result');
+            const resultContent = document.getElementById('storyboard-result-content');
+            
+            resultDiv.style.display = 'block';
+            resultContent.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在生成分镜，请稍候...</p>
+                </div>
+            `;
 
             setTimeout(() => {
-                const breakdown = `【15 秒分段总表】
+                resultContent.innerHTML = `
+<span class="tag tag-info">🎬 分镜脚本</span>
 
-第 1 段｜00-15 秒｜大婚觉醒
-- 剧情摘要：林婉儿在大婚现场重生觉醒
-- 主要角色：林婉儿
-- 主要场景：相府喜堂
-- 冲突功能：开场铺垫
-- 情绪推进：平静→震惊→隐忍
+【第 1 段】0:00-0:15
+场景：咖啡厅 - 日内
+角色：林小雨、李阳
+镜头：中景→特写
+画面：林小雨坐在咖啡厅，紧张地搅动咖啡
+提示词：咖啡厅室内，年轻女性，紧张表情，手部特写，温暖光线
 
-第 2 段｜15-30 秒｜虚伪誓言
-- 剧情摘要：赵恒挑起盖头发誓
-- 主要角色：林婉儿、赵恒
-- 主要场景：相府喜堂
-- 冲突功能：建立对立
-- 情绪推进：隐忍→冷笑
+【第 2 段】0:15-0:30
+场景：咖啡厅 - 日内
+角色：林小雨、李阳
+镜头：对视镜头
+画面：林小雨抬头，认出对方
+提示词：女性惊讶表情，抬头动作，咖啡厅背景，情感张力
 
-第 3 段｜30-45 秒｜背叛消息
-- 剧情摘要：小翠告知赵恒去了林侧妃处
-- 主要角色：林婉儿、小翠
-- 主要场景：新房
-- 冲突功能：冲突升级
-- 情绪推进：隐忍→愤怒
-
-第 4 段｜45-60 秒｜正面交锋
-- 剧情摘要：林婉儿踹门捉奸
-- 主要角色：林婉儿、赵恒、林侧妃
-- 冲突功能：爆点
-- 情绪推进：愤怒→冷笑→掌控
+【第 3 段】0:30-0:45
+场景：咖啡厅 - 日内
+角色：林小雨、李阳
+镜头：双人镜头
+画面：李阳微笑回应
+提示词：男性微笑，复杂眼神，咖啡厅环境，重逢氛围
 
 ---
-
-## 第 1 段（00-15 秒）｜大婚觉醒
-
-【本段剧情功能】
-开场建立主角重生设定，抓住观众注意力
-
-【本段角色状态】
-林婉儿：身着凤冠霞帔，盖头下眼神清醒，内心震惊但表面平静
-
-【本段场景描述】
-相府喜堂，红烛高照，喜字满堂，宾客喧闹
-
-【本段动作拆解】
-0-3 秒：特写林婉儿眼睛突然睁开
-3-6 秒：内心独白"我又回到了这一天"
-6-9 秒：手掐掌心，确认不是梦
-9-12 秒：深呼吸，调整状态
-12-15 秒：听到脚步声，准备应对
-
-【本段关键台词】
-**林婉儿**（内心）："我又回到了这一天...大婚之日，也是我被背叛的开始。"
-
-【图像提示词】
-00-15 秒，古风喜堂内，红烛高照，林婉儿身着红色凤冠霞帔，盖头半遮面，眼神清醒锐利，手部特写掐进掌心，前景红烛，中景新娘，背景喜字和宾客虚化，低角度仰视，暖色调电影光效，丝绸质感，cinematic, ultra detailed, realistic lighting, realistic texture, dramatic composition, vertical frame, high detail
-
-【视频提示词】
-时间段：00-15 秒
-场景：古风喜堂，红烛高照，喜字满堂
-人物：林婉儿，红色凤冠霞帔，盖头半遮
-动作设计：眼睛突然睁开→内心独白→手掐掌心→深呼吸→准备应对
-镜头设计：特写眼睛→中景上半身→特写手部→拉远到全景
-表演设计：眼神从迷茫到清醒到锐利，呼吸从急促到平稳
-环境反馈：烛光摇曳，盖头微动
-台词与人声：林婉儿内心独白（冷静、坚定）
-声音设计：仅保留环境音与人声；烛光噼啪声、布料摩擦声、内心独白
-画面风格：电影感，真实光影，真实材质，高细节，竖屏构图，动作连续，物理合理，人物一致，场景一致
-
-禁止项：文字/UI/水印/Logo/角标/可读文字/真实 UI
-
-【强制声明】
-无背景音乐，仅保留环境音与人声；画面禁字幕/文字/水印/Logo；禁止可读文字；禁止超现实夸张；禁止无反作用力动作`;
-
-                document.getElementById('storyboard-output').textContent = breakdown;
-                document.getElementById('storyboard-output-card').style.display = 'block';
-                document.getElementById('storyboard-status').textContent = '分镜拆解完成！';
-                document.getElementById('storyboard-status').parentElement.className = 'status ready';
-                
-                btn.disabled = false;
-                btn.innerHTML = '🎬 重新拆解';
+💡 共生成 3 个分镜段落
+建议：可根据实际拍摄需要调整每段时长
+                `.trim();
             }, 2000);
         }
 
-        // Prompt Generation
-        function generatePrompts() {
-            const selectedTags = Array.from(document.querySelectorAll('.tag.selected')).map(t => t.textContent);
-            const count = document.getElementById('prompt-count').value;
-            const template = document.getElementById('prompt-template').value;
+        // Generate Prompt (Mock Function)
+        function generatePrompt() {
+            const input = document.getElementById('prompt-input').value;
             
-            if (selectedTags.length < 2) {
-                alert('请至少选择 2 个标签！');
+            if (!input.trim()) {
+                alert('⚠️ 请先输入内容');
                 return;
             }
 
-            const btn = document.getElementById('generate-prompt-btn');
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading"></span> 生成中...';
+            const resultDiv = document.getElementById('prompt-result');
+            const resultContent = document.getElementById('prompt-result-content');
+            
+            resultDiv.style.display = 'block';
+            resultContent.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在生成提示词，请稍候...</p>
+                </div>
+            `;
 
             setTimeout(() => {
-                let prompts = '';
-                for (let i = 1; i <= count; i++) {
-                    prompts += `【提示词 ${i}】（变体${i}）
-杰作，最佳质量，超高清，${selectedTags.join('，')}，${selectedTags.includes('古风') ? '国风美学，东方韵味' : '电影级质感'}，${selectedTags.includes('CG 感') ? '3D 渲染，虚幻引擎 5' : '超高清写实摄影'}，cinematic, ultra detailed, realistic lighting, realistic texture, dramatic composition, vertical frame, high detail
+                resultContent.innerHTML = `
+<span class="tag tag-info">🖼️ 图像提示词</span>
+
+【主提示词】
+咖啡厅场景，年轻亚洲女性，25 岁，黑色长发，白色衬衫，紧张表情，手部特写搅动咖啡，温暖室内光线，电影感构图，高细节，8k 质量
+
+【负向提示词】
+模糊，低质量，畸形，多余肢体，文字，水印，签名
+
+【风格标签】
+#电影感 #写实风格 #亚洲人像 #室内场景 #情感表达
 
 ---
+<span class="tag tag-info">🎥 视频提示词</span>
 
-`;
-                }
+【动态描述】
+镜头从中景缓慢推进到特写，聚焦女性面部表情变化，背景虚化，光线柔和
 
-                document.getElementById('prompt-output').textContent = prompts;
-                document.getElementById('prompt-output-card').style.display = 'block';
-                
-                btn.disabled = false;
-                btn.innerHTML = '✨ 重新生成';
-            }, 1500);
+【镜头运动】
+推镜头 + 焦点转换
+
+【时长建议】
+5-8 秒
+
+---
+💡 提示词已优化，可直接用于 AI 绘画/视频生成工具
+                `.trim();
+            }, 2000);
         }
 
-        // Initialize
-        initTags();
+        // Navigation scroll highlight
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
