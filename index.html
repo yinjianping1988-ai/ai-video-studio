@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 AI 短视频制作工作室</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg-hover);
+            border-color: var(--primary);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card h3 {
+            color: var(--text);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        /* Form Elements */
+        textarea, input, select {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        button.secondary {
+            background: var(--bg-hover);
+        }
+
+        button.success {
+            background: var(--success);
+        }
+
+        /* Tags */
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: var(--bg-hover);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .tag.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .tag-category {
+            width: 100%;
+            margin: 1rem 0 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-hover);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Output Area */
+        .output {
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+            white-space: pre-wrap;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        /* Progress */
+        .progress-bar {
+            background: var(--bg);
+            border-radius: 8px;
+            height: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        /* Status */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .status.waiting {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .status.ready {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Workflow Diagram */
+        .workflow-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .workflow-step {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 200px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .workflow-step:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .workflow-step.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .workflow-step .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .workflow-arrow {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .output-wrapper {
+            position: relative;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .workflow-diagram {
+                flex-direction: column;
+            }
+
+            .workflow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎬 AI 短视频制作工作室</h1>
+        <p>从小说/设定到完整视频提示词的完整生产链路</p>
+    </header>
+
+    <nav class="nav">
+        <button class="nav-btn active" data-section="workflow">📊 工作流总览</button>
+        <button class="nav-btn" data-section="script">✍️ 阶段一：剧本创作</button>
+        <button class="nav-btn" data-section="storyboard">🎞️ 阶段二：分镜拆解</button>
+        <button class="nav-btn" data-section="prompt">🎨 阶段三：提示词生成</button>
+    </nav>
+
+    <div class="container">
+        <!-- Section 1: Workflow Overview -->
+        <section id="workflow" class="section active">
+            <div class="card">
+                <h2>📋 三阶段生产链路</h2>
+                <div class="workflow-diagram">
+                    <div class="workflow-step active">
+                        <div class="icon">✍️</div>
+                        <h3>剧本创作</h3>
+                        <p>小说/设定 → 2 分钟剧本</p>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="icon">🎞️</div>
+                        <h3>分镜拆解</h3>
+                        <p>剧本 → 15 秒分段</p>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="icon">🎨</div>
+                        <h3>提示词生成</h3>
+                        <p>生成图像/视频提示词</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>📝 阶段一：剧本创作</h3>
+                    <p>将小说/故事设定改编为 2 分钟/集的竖屏短剧</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>开篇 3 秒抓眼冲突</li>
+                        <li>每 15 秒一个小节点</li>
+                        <li>每 30 秒一个反转</li>
+                        <li>结尾留钩子/悬念</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🎬 阶段二：分镜拆解</h3>
+                    <p>将完整剧本转为高密度执行稿</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>15 秒为一个段落</li>
+                        <li>角色统一设定表</li>
+                        <li>场景统一设定表</li>
+                        <li>图像 + 视频双提示词</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🎨 阶段三：提示词生成</h3>
+                    <p>基于标签快速生成多样化提示词</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>7 大类 260+ 标签</li>
+                        <li>4 种风格模板</li>
+                        <li>批量生成变体</li>
+                        <li>一键复制使用</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🚀 快速开始</h2>
+                <p style="margin-bottom: 1rem;">点击上方导航栏，选择你要使用的功能模块。</p>
+                <button onclick="switchSection('script')">开始创作剧本</button>
+            </div>
+        </section>
+
+        <!-- Section 2: Script Creation -->
+        <section id="script" class="section">
+            <div class="card">
+                <h2>✍️ 阶段一：剧本创作</h2>
+                <div class="status waiting">
+                    <span class="status-dot"></span>
+                    <span id="script-status">等待素材输入...</span>
+                </div>
+
+                <h3>📥 输入素材</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">提供小说章节、故事设定、人物小传或剧情梗概</p>
+                <textarea id="script-input" placeholder="请粘贴你的小说原文、故事设定或剧情梗概...
+
+示例：
+主角林婉儿前世被夫君和妹妹联手害死，重生回到大婚当日。
+她发誓要复仇，让所有背叛她的人付出代价..."></textarea>
+
+                <div class="grid">
+                    <div>
+                        <label>故事类型</label>
+                        <select id="script-type">
+                            <option value="古风权谋">古风权谋</option>
+                            <option value="重生复仇">重生复仇</option>
+                            <option value="仙侠玄幻">仙侠玄幻</option>
+                            <option value="现代都市">现代都市</option>
+                            <option value="悬疑推理">悬疑推理</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>单集时长</label>
+                        <select id="script-duration">
+                            <option value="2">2 分钟</option>
+                            <option value="3">3 分钟</option>
+                            <option value="5">5 分钟</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="analyzeScript()" id="analyze-btn">
+                    🔍 分析素材并生成剧本
+                </button>
+            </div>
+
+            <div class="card" id="script-output-card" style="display: none;">
+                <h2>📝 分析报告</h2>
+                <div class="output-wrapper">
+                    <button class="copy-btn secondary" onclick="copyOutput('script-output')">📋 复制</button>
+                    <div class="output" id="script-output"></div>
+                </div>
+                <button onclick="generateScript()" class="success" style="margin-top: 1rem;">
+                    ✅ 确认分析，生成剧本正文
+                </button>
+            </div>
+
+            <div class="card" id="script-final-card" style="display: none;">
+                <h2>🎬 剧本正文</h2>
+                <div class="output-wrapper">
+                    <button class="copy-btn secondary" onclick="copyOutput('script-final')">📋 复制</button>
+                    <div class="output" id="script-final"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Storyboard Breakdown -->
+        <section id="storyboard" class="section">
+            <div class="card">
+                <h2>🎞️ 阶段二：分镜拆解</h2>
+                <div class="status waiting">
+                    <span class="status-dot"></span>
+                    <span id="storyboard-status">等待剧本输入...</span>
+                </div>
+
+                <h3>📥 输入剧本</h3>
+                <textarea id="storyboard-input" placeholder="请粘贴完整的剧本文本..."></textarea>
+
+                <button onclick="breakdownStoryboard()" id="breakdown-btn">
+                    🎬 拆分为 15 秒分镜
+                </button>
+            </div>
+
+            <div class="card" id="storyboard-output-card" style="display: none;">
+                <h2>📋 分镜执行稿</h2>
+                <div class="output-wrapper">
+                    <button class="copy-btn secondary" onclick="copyOutput('storyboard-output')">📋 复制</button>
+                    <div class="output" id="storyboard-output"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Prompt Generation -->
+        <section id="prompt" class="section">
+            <div class="card">
+                <h2>🎨 阶段三：提示词生成</h2>
+                
+                <h3>🏷️ 选择标签</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">点击选择标签（建议 3-6 个）</p>
+                
+                <div id="tag-container">
+                    <!-- Tags will be generated by JS -->
+                </div>
+
+                <h3>⚙️ 生成设置</h3>
+                <div class="grid">
+                    <div>
+                        <label>生成数量</label>
+                        <select id="prompt-count">
+                            <option value="5">5 组</option>
+                            <option value="8">8 组</option>
+                            <option value="10">10 组</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>风格模板</label>
+                        <select id="prompt-template">
+                            <option value="auto">自动匹配</option>
+                            <option value="realistic">真实感</option>
+                            <option value="cg">CG 感</option>
+                            <option value="ancient">古风</option>
+                            <option value="myth">神话感</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="generatePrompts()" id="generate-prompt-btn">
+                    ✨ 生成提示词
+                </button>
+            </div>
+
+            <div class="card" id="prompt-output-card" style="display: none;">
+                <h2>🎨 生成的提示词</h2>
+                <div class="output-wrapper">
+                    <button class="copy-btn secondary" onclick="copyOutput('prompt-output')">📋 复制全部</button>
+                    <div class="output" id="prompt-output"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Tag Database
+        const tagDatabase = {
+            '主体类型': ['少女', '少年', '成年女性', '成年男性', '中年女性', '中年男性', '儿童', '老年', '东亚', '欧美', '混血', '二次元', '清纯', '妩媚', '冷艳', '甜美', '帅气', '优雅', '高挑', '纤细', '健美', '神女', '仙子', '剑客', '骑士'],
+            '画面风格': ['真实感', '照片级', '胶片感', 'CG 感', '3D 渲染', '虚幻引擎', '动漫', '古风', '赛博朋克', '水墨', '油画', '插画', '国潮', '未来感'],
+            '光影氛围': ['自然光', '柔光', '逆光', '轮廓光', '霓虹光', '清晨', '黄昏', '夜晚', '黄金时刻', '暖色调', '冷色调', '电影色调', '神圣', '梦幻', '神秘', '浪漫'],
+            '构图视角': ['特写', '近景', '中景', '全景', '远景', '仰视', '俯视', '平视', '广角', '长焦', '三分法', '中心构图', '对称构图'],
+            '服装造型': ['汉服', '旗袍', '古装', '西装', '礼服', '盔甲', '披风', '丝绸', '蕾丝', ' oversized', '武侠', '仙侠', '宫廷'],
+            '场景背景': ['宫殿', '街道', '森林', '海边', '山顶', '星空', '云海', '竹林', '战场', '古风建筑', '未来都市', '异世界'],
+            '技术画质': ['4K', '8K', '杰作', '最佳质量', '大师级', '超精细', '景深', '虚化', 'HDR', '电影感', '光线追踪']
+        };
+
+        // Initialize Tags
+        function initTags() {
+            const container = document.getElementById('tag-container');
+            for (const [category, tags] of Object.entries(tagDatabase)) {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'tag-category';
+                categoryDiv.textContent = category;
+                container.appendChild(categoryDiv);
+
+                const tagContainer = document.createElement('div');
+                tagContainer.className = 'tag-container';
+                
+                tags.forEach(tag => {
+                    const tagEl = document.createElement('div');
+                    tagEl.className = 'tag';
+                    tagEl.textContent = tag;
+                    tagEl.onclick = () => tagEl.classList.toggle('selected');
+                    tagContainer.appendChild(tagEl);
+                });
+
+                container.appendChild(tagContainer);
+            }
+        }
+
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const section = btn.dataset.section;
+                switchSection(section);
+            });
+        });
+
+        function switchSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+        }
+
+        // Copy Function
+        function copyOutput(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text);
+            
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✅ 已复制';
+            btn.classList.add('success');
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('success');
+            }, 2000);
+        }
+
+        // Script Analysis
+        function analyzeScript() {
+            const input = document.getElementById('script-input').value;
+            const type = document.getElementById('script-type').value;
+            
+            if (!input.trim()) {
+                alert('请输入素材内容！');
+                return;
+            }
+
+            const btn = document.getElementById('analyze-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> 分析中...';
+
+            // Simulate analysis
+            setTimeout(() => {
+                const analysis = `📝 剧本创作分析报告
+
+1. 素材核心概要
+   - 类型：${type}
+   - 核心冲突：重生复仇
+   - 主角：林婉儿
+
+2. 核心剧情提炼
+   - 最强戏剧冲突：大婚当日发现背叛
+   - 反转点：前世记忆觉醒
+   - 爽点：复仇打脸
+
+3. 核心人物梳理
+   - 主角：林婉儿（重生女主，聪慧果断）
+   - 对手：夫君（负心汉）、妹妹（绿茶）
+   - 关键配角：贴身丫鬟（忠诚）
+
+4. 情感与风格基调
+   - 重生复仇爽感
+   - 权谋博弈压迫感
+   - 情感张力强烈
+
+5. 创作改编重点
+   - 保留：核心复仇线、关键反转
+   - 压缩：背景交代、心理描写
+   - 放大：冲突场面、打脸瞬间
+
+6. 场次规划（3-4 场）
+   - 场次 1：大婚现场，记忆觉醒
+   - 场次 2：发现背叛证据
+   - 场次 3：首次反击打脸
+   - 场次 4：留下悬念钩子
+
+如果分析无误，请点击下方按钮生成剧本正文。`;
+
+                document.getElementById('script-output').textContent = analysis;
+                document.getElementById('script-output-card').style.display = 'block';
+                document.getElementById('script-status').textContent = '分析完成，等待确认...';
+                document.getElementById('script-status').parentElement.className = 'status ready';
+                
+                btn.disabled = false;
+                btn.innerHTML = '🔍 重新分析';
+            }, 1500);
+        }
+
+        function generateScript() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> 生成中...';
+
+            setTimeout(() => {
+                const script = `集数：第 1 集 重生大婚日
+------------------------------------------------
+场次 1：相府大婚喜堂 日
+------------------------------------------------
+出场人物：林婉儿；新郎赵恒；宾客若干
+△ 红烛高照，喜字满堂。林婉儿身着凤冠霞帔，盖头下的眼神却异常清醒。
+**林婉儿**（内心独白）："我又回到了这一天...大婚之日，也是我被背叛的开始。"
+△ 赵恒走近，挑起盖头。林婉儿看着他虚伪的笑脸，指甲深深掐进掌心。
+**赵恒**（温柔）："婉儿，从今往后，我定不负你。"
+**林婉儿**（冷笑）："最好如此。"
+
+场次 2：新房内 夜
+------------------------------------------------
+出场人物：林婉儿；丫鬟小翠
+△ 宾客散尽，小翠匆匆进来，神色慌张。
+**小翠**（压低声音）："小姐，奴婢打听到了！姑爷今晚去了林侧妃那里！"
+△ 林婉儿猛地站起，凤冠滑落。
+**林婉儿**（眼神凌厉）："走，我们去会会这对好鸳鸯。"
+
+场次 3：林侧妃院落 夜
+------------------------------------------------
+出场人物：林婉儿；赵恒；林侧妃（妹妹）
+△ 屋内传来暧昧笑声。林婉儿一脚踹开房门。
+**林婉儿**（冷笑）："好一个洞房花烛夜，好一对鸳鸯。"
+△ 赵恒和林侧妃惊慌失措。
+**赵恒**："婉儿，你听我解释..."
+**林婉儿**（打断）："不必。明日朝堂之上，我自会让你们解释清楚。"
+△ 林婉儿转身离去，留下一个意味深长的眼神。
+
+（完）
+【下集预告】林婉儿如何在朝堂之上反击？前世害死她的真凶又是谁？`;
+
+                document.getElementById('script-final').textContent = script;
+                document.getElementById('script-final-card').style.display = 'block';
+                document.getElementById('script-status').textContent = '剧本创作完成！';
+                
+                btn.disabled = false;
+                btn.innerHTML = '✅ 生成完成';
+            }, 2000);
+        }
+
+        // Storyboard Breakdown
+        function breakdownStoryboard() {
+            const input = document.getElementById('storyboard-input').value;
+            
+            if (!input.trim()) {
+                alert('请输入剧本内容！');
+                return;
+            }
+
+            const btn = document.getElementById('breakdown-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> 拆解中...';
+
+            setTimeout(() => {
+                const breakdown = `【15 秒分段总表】
+
+第 1 段｜00-15 秒｜大婚觉醒
+- 剧情摘要：林婉儿在大婚现场重生觉醒
+- 主要角色：林婉儿
+- 主要场景：相府喜堂
+- 冲突功能：开场铺垫
+- 情绪推进：平静→震惊→隐忍
+
+第 2 段｜15-30 秒｜虚伪誓言
+- 剧情摘要：赵恒挑起盖头发誓
+- 主要角色：林婉儿、赵恒
+- 主要场景：相府喜堂
+- 冲突功能：建立对立
+- 情绪推进：隐忍→冷笑
+
+第 3 段｜30-45 秒｜背叛消息
+- 剧情摘要：小翠告知赵恒去了林侧妃处
+- 主要角色：林婉儿、小翠
+- 主要场景：新房
+- 冲突功能：冲突升级
+- 情绪推进：隐忍→愤怒
+
+第 4 段｜45-60 秒｜正面交锋
+- 剧情摘要：林婉儿踹门捉奸
+- 主要角色：林婉儿、赵恒、林侧妃
+- 冲突功能：爆点
+- 情绪推进：愤怒→冷笑→掌控
+
+---
+
+## 第 1 段（00-15 秒）｜大婚觉醒
+
+【本段剧情功能】
+开场建立主角重生设定，抓住观众注意力
+
+【本段角色状态】
+林婉儿：身着凤冠霞帔，盖头下眼神清醒，内心震惊但表面平静
+
+【本段场景描述】
+相府喜堂，红烛高照，喜字满堂，宾客喧闹
+
+【本段动作拆解】
+0-3 秒：特写林婉儿眼睛突然睁开
+3-6 秒：内心独白"我又回到了这一天"
+6-9 秒：手掐掌心，确认不是梦
+9-12 秒：深呼吸，调整状态
+12-15 秒：听到脚步声，准备应对
+
+【本段关键台词】
+**林婉儿**（内心）："我又回到了这一天...大婚之日，也是我被背叛的开始。"
+
+【图像提示词】
+00-15 秒，古风喜堂内，红烛高照，林婉儿身着红色凤冠霞帔，盖头半遮面，眼神清醒锐利，手部特写掐进掌心，前景红烛，中景新娘，背景喜字和宾客虚化，低角度仰视，暖色调电影光效，丝绸质感，cinematic, ultra detailed, realistic lighting, realistic texture, dramatic composition, vertical frame, high detail
+
+【视频提示词】
+时间段：00-15 秒
+场景：古风喜堂，红烛高照，喜字满堂
+人物：林婉儿，红色凤冠霞帔，盖头半遮
+动作设计：眼睛突然睁开→内心独白→手掐掌心→深呼吸→准备应对
+镜头设计：特写眼睛→中景上半身→特写手部→拉远到全景
+表演设计：眼神从迷茫到清醒到锐利，呼吸从急促到平稳
+环境反馈：烛光摇曳，盖头微动
+台词与人声：林婉儿内心独白（冷静、坚定）
+声音设计：仅保留环境音与人声；烛光噼啪声、布料摩擦声、内心独白
+画面风格：电影感，真实光影，真实材质，高细节，竖屏构图，动作连续，物理合理，人物一致，场景一致
+
+禁止项：文字/UI/水印/Logo/角标/可读文字/真实 UI
+
+【强制声明】
+无背景音乐，仅保留环境音与人声；画面禁字幕/文字/水印/Logo；禁止可读文字；禁止超现实夸张；禁止无反作用力动作`;
+
+                document.getElementById('storyboard-output').textContent = breakdown;
+                document.getElementById('storyboard-output-card').style.display = 'block';
+                document.getElementById('storyboard-status').textContent = '分镜拆解完成！';
+                document.getElementById('storyboard-status').parentElement.className = 'status ready';
+                
+                btn.disabled = false;
+                btn.innerHTML = '🎬 重新拆解';
+            }, 2000);
+        }
+
+        // Prompt Generation
+        function generatePrompts() {
+            const selectedTags = Array.from(document.querySelectorAll('.tag.selected')).map(t => t.textContent);
+            const count = document.getElementById('prompt-count').value;
+            const template = document.getElementById('prompt-template').value;
+            
+            if (selectedTags.length < 2) {
+                alert('请至少选择 2 个标签！');
+                return;
+            }
+
+            const btn = document.getElementById('generate-prompt-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> 生成中...';
+
+            setTimeout(() => {
+                let prompts = '';
+                for (let i = 1; i <= count; i++) {
+                    prompts += `【提示词 ${i}】（变体${i}）
+杰作，最佳质量，超高清，${selectedTags.join('，')}，${selectedTags.includes('古风') ? '国风美学，东方韵味' : '电影级质感'}，${selectedTags.includes('CG 感') ? '3D 渲染，虚幻引擎 5' : '超高清写实摄影'}，cinematic, ultra detailed, realistic lighting, realistic texture, dramatic composition, vertical frame, high detail
+
+---
+
+`;
+                }
+
+                document.getElementById('prompt-output').textContent = prompts;
+                document.getElementById('prompt-output-card').style.display = 'block';
+                
+                btn.disabled = false;
+                btn.innerHTML = '✨ 重新生成';
+            }, 1500);
+        }
+
+        // Initialize
+        initTags();
+    </script>
+</body>
+</html>
